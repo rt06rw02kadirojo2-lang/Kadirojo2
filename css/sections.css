@@ -911,35 +911,51 @@
     justify-content: center;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
     z-index: 10;
-    cursor: help;
+    cursor: pointer;
     transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     border: 2px solid var(--primary-color);
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.denah-marker:hover {
+    transform: translate(-50%, -50%) scale(1.2) translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+    z-index: 100;
+}
+
+.denah-marker:hover i {
+    color: white !important;
+}
+
+/* Marker Icon Animation */
+@keyframes markerFloat {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-3px);
+    }
 }
 
 .denah-marker i {
     font-size: 18px;
     color: var(--primary-color);
-}
-
-.denah-marker:hover {
-    transform: scale(1.3);
-    background: var(--primary-color);
-}
-
-.denah-marker:hover i {
-    color: white;
+    animation: markerFloat 2s ease-in-out infinite;
 }
 
 .marker-rt {
-    border-color: #ef4444;
+    border-color: #000000;
 }
 
 .marker-rt i {
-    color: #ef4444;
+    color: #000000;
 }
 
 .marker-rt:hover {
-    background: #ef4444;
+    background: #000000;
 }
 
 .marker-ronda {
@@ -1029,33 +1045,46 @@
         transform: scale(1);
         box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.4);
     }
+
     70% {
         transform: scale(1.1);
         box-shadow: 0 0 0 10px rgba(255, 255, 255, 0);
     }
+
     100% {
         transform: scale(1);
         box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
     }
 }
 
-.dot.rt { 
-    background: #ef4444; 
-    box-shadow: 0 0 10px rgba(239, 68, 68, 0.5); 
+.dot.rt {
+    background: #000000;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
-.dot.ronda { 
-    background: #10b981; 
-    box-shadow: 0 0 10px rgba(16, 185, 129, 0.5); 
+
+.dot.ronda {
+    background: #10b981;
+    box-shadow: 0 0 10px rgba(16, 185, 129, 0.5);
 }
-.dot.entry { 
-    background: #3b82f6; 
-    box-shadow: 0 0 10px rgba(59, 130, 246, 0.5); 
+
+.dot.entry {
+    background: #3b82f6;
+    box-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
 }
 
 /* Light mode overrides for legend dots */
-body.light-mode .dot.rt { box-shadow: 0 0 8px rgba(239, 68, 68, 0.3); }
-body.light-mode .dot.ronda { box-shadow: 0 0 8px rgba(16, 185, 129, 0.3); }
-body.light-mode .dot.entry { box-shadow: 0 0 8px rgba(59, 130, 246, 0.3); }
+body.light-mode .dot.rt {
+    background: #333333;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
+}
+
+body.light-mode .dot.ronda {
+    box-shadow: 0 0 8px rgba(16, 185, 129, 0.3);
+}
+
+body.light-mode .dot.entry {
+    box-shadow: 0 0 8px rgba(59, 130, 246, 0.3);
+}
 
 .zoomable {
     overflow: hidden;

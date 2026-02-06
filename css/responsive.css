@@ -339,6 +339,32 @@
         padding: 0 5px;
     }
 
+    /* Denah Marker Mobile Adjustments */
+    .denah-marker {
+        width: 30px;
+        height: 30px;
+    }
+
+    .denah-marker i {
+        font-size: 14px;
+    }
+
+    /* Fine-tune marker positions for mobile */
+    .marker-rt {
+        top: 29% !important;
+        left: 45% !important;
+    }
+
+    .marker-ronda {
+        top: 38% !important;
+        left: 70% !important;
+    }
+
+    .marker-entry {
+        top: 12% !important;
+        left: 40% !important;
+    }
+
     .location-item i {
         font-size: 24px;
     }
