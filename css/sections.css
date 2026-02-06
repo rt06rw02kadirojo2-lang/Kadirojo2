@@ -721,8 +721,11 @@
 .image-only-card img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
     transition: transform 0.8s ease;
+    padding: 20px;
+    background: #ffffff;
+    /* Adds a clean background context for contain fit */
 }
 
 .info-card-overlay-simple {
@@ -751,7 +754,7 @@
 }
 
 .image-only-card:hover img {
-    transform: scale(1.1);
+    transform: scale(1.05);
 }
 
 .image-only-card:hover .info-card-overlay-simple {
