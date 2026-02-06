@@ -394,4 +394,13 @@
     .footer-content {
         gap: 30px;
     }
+
+    .denah-legend {
+        gap: 15px;
+        padding: 15px;
+    }
+
+    .legend-item {
+        font-size: 13px;
+    }
 }

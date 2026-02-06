@@ -991,39 +991,71 @@
     margin-bottom: 15px;
 }
 
+/* Legend Responsiveness & Dots */
 .denah-legend {
     display: flex;
     justify-content: center;
-    gap: 30px;
-    padding: 25px;
+    flex-wrap: wrap;
+    gap: 25px;
+    padding: 20px;
     background: rgba(255, 255, 255, 0.03);
+    border-radius: 0 0 20px 20px;
 }
 
 .legend-item {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 12px;
     font-size: 14px;
     color: var(--text-secondary);
+    transition: transform 0.3s ease;
+}
+
+.legend-item:hover {
+    transform: translateY(-2px);
+    color: var(--text-primary);
 }
 
 .dot {
-    width: 12px;
-    height: 12px;
+    width: 14px;
+    height: 14px;
     border-radius: 50%;
+    position: relative;
+    animation: pulseDot 2s infinite;
 }
 
-.dot.rt {
-    background: #ef4444;
+@keyframes pulseDot {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.4);
+    }
+    70% {
+        transform: scale(1.1);
+        box-shadow: 0 0 0 10px rgba(255, 255, 255, 0);
+    }
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
+    }
 }
 
-.dot.ronda {
-    background: #10b981;
+.dot.rt { 
+    background: #ef4444; 
+    box-shadow: 0 0 10px rgba(239, 68, 68, 0.5); 
+}
+.dot.ronda { 
+    background: #10b981; 
+    box-shadow: 0 0 10px rgba(16, 185, 129, 0.5); 
+}
+.dot.entry { 
+    background: #3b82f6; 
+    box-shadow: 0 0 10px rgba(59, 130, 246, 0.5); 
 }
 
-.dot.entry {
-    background: #3b82f6;
-}
+/* Light mode overrides for legend dots */
+body.light-mode .dot.rt { box-shadow: 0 0 8px rgba(239, 68, 68, 0.3); }
+body.light-mode .dot.ronda { box-shadow: 0 0 8px rgba(16, 185, 129, 0.3); }
+body.light-mode .dot.entry { box-shadow: 0 0 8px rgba(59, 130, 246, 0.3); }
 
 .zoomable {
     overflow: hidden;
