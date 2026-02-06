@@ -365,6 +365,12 @@
         left: 40% !important;
     }
 
+    .location-item {
+        margin: 0 auto;
+        max-width: 400px;
+        width: 100%;
+    }
+
     .location-item i {
         font-size: 24px;
     }
