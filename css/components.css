@@ -3,24 +3,23 @@
     position: fixed;
     top: 0;
     width: 100%;
-    background: rgba(10, 10, 10, 0.8);
-    backdrop-filter: blur(30px);
-    padding: 15px 0;
+    background: transparent;
+    /* Start Transparent */
+    padding: 25px 0;
     z-index: 1000;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
-    border-bottom: 1px solid rgba(99, 102, 241, 0.2);
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    border-bottom: 1px solid transparent;
+    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .navbar.scrolled {
-    background: rgba(10, 10, 10, 0.95);
-    padding: 10px 0;
-    backdrop-filter: blur(40px);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    background: rgba(5, 5, 5, 0.8);
+    padding: 15px 0;
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .navbar:hover {
-    background: rgba(10, 10, 10, 0.9);
+    background: rgba(5, 5, 5, 0.9);
 }
 
 .nav-container {

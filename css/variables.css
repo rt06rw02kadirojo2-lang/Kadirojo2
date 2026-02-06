@@ -6,14 +6,59 @@
 }
 
 :root {
+    /* Feedmusic Aesthetic Palette */
     --primary-color: #2bff00;
+    /* Neon Green */
+    --primary-hover: #33ff00;
+    --primary-light: #ccff00;
+
     --secondary-color: #a855f7;
-    --dark-color: #0a0a0a;
-    --light-color: #f5f5f5;
-    --text-color: #f8f9fa;
+    /* Electric Purple Accents */
+    --secondary-hover: #9333ea;
+
+    --accent-red: #ff0055;
+
+    /* Background Colors - Deep Void */
+    --bg-primary: #050505;
+    /* Pitch Black */
+    --bg-secondary: #0a0a0a;
+    --bg-tertiary: #111111;
+    --bg-card: rgba(255, 255, 255, 0.03);
+    /* Ghost Card */
+    --bg-glass: rgba(20, 20, 20, 0.6);
+
+    /* Variables for gradients */
+    --bg-glass-tint: linear-gradient(180deg, rgba(255, 255, 255, 0.02) 0%, rgba(255, 255, 255, 0.0) 100%);
+
+    /* Text Colors - High Contrast */
     --text-primary: #ffffff;
-    --text-secondary: #9ca3af;
-    --text-tertiary: #6b7280;
-    --border-color: #2a2a2a;
-    --transition: all 0.3s ease;
+    --text-secondary: #a3a3a3;
+    /* Neutral Gray */
+    --text-tertiary: #525252;
+    --text-muted: #404040;
+    --text-color: #ffffff;
+
+    /* Borders - Ultra Thin */
+    --border-color: rgba(255, 255, 255, 0.1);
+    --border-subtle: rgba(255, 255, 255, 0.05);
+    --divider: rgba(255, 255, 255, 0.05);
+
+    /* Effects */
+    --shadow-glow: 0 0 40px rgba(43, 255, 0, 0.15);
+    /* Neon Glow */
+    --shadow-sm: 0 4px 20px rgba(0, 0, 0, 0.5);
+
+    /* Typography */
+    --font-heading: 'Inter', sans-serif;
+    --font-body: 'Inter', sans-serif;
+
+    /* Transitions - Cinematic */
+    --transition-fast: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    --transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    --transition-slow: all 0.8s cubic-bezier(0.19, 1, 0.22, 1);
+
+    /* Blur */
+    --blur-sm: blur(10px);
+    --blur-md: blur(20px);
+    --blur-lg: blur(40px);
 }

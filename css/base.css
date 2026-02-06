@@ -55,30 +55,46 @@ html {
 }
 
 body {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    font-family: var(--font-body);
     color: var(--text-color);
-    background-color: #050505;
+    background-color: var(--bg-primary);
+
+    /* Feedmusic-style Deep Void Background */
     background-image:
-        radial-gradient(at 0% 0%, rgba(99, 102, 241, 0.15) 0px, transparent 50%),
-        radial-gradient(at 100% 0%, rgba(168, 85, 247, 0.15) 0px, transparent 50%),
-        radial-gradient(at 100% 100%, rgba(99, 102, 241, 0.15) 0px, transparent 50%),
-        radial-gradient(at 0% 100%, rgba(168, 85, 247, 0.15) 0px, transparent 50%);
+        radial-gradient(circle at 50% 0%, rgba(20, 30, 60, 0.4) 0%, transparent 60%),
+        radial-gradient(circle at 100% 0%, rgba(43, 255, 0, 0.03) 0%, transparent 40%);
     background-attachment: fixed;
     background-size: 100% 100%;
+
     line-height: 1.6;
     font-size: 16px;
     font-weight: 400;
-    letter-spacing: -0.5px;
+    letter-spacing: 0.02em;
+    /* Wider spacing */
     min-height: 100vh;
     position: relative;
     overflow-x: hidden;
-    /* perspective: 1000px; REMOVED to fix position: fixed context */
+    -webkit-font-smoothing: antialiased;
 }
 
 /* Ensure content is above the pattern */
 body>* {
     position: relative;
     z-index: 1;
+}
+
+/* ============ SCROLL REVEAL (Feedmusic Style) ============ */
+.reveal {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+    /* Cinematic slow ease */
+    will-change: opacity, transform;
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .container {
