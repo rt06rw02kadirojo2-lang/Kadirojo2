@@ -199,6 +199,10 @@ function initCursorBlob() {
 function initTypewriter() {
     const text = "RT06 RW02 KADIROJO 2";
     const element = document.getElementById('typewriter');
+    if (!element) return;
+
+    // Reset element content before starting
+    element.textContent = "";
     let i = 0;
 
     function type() {
@@ -209,10 +213,7 @@ function initTypewriter() {
         }
     }
 
-    if (element) {
-        element.textContent = "";
-        type();
-    }
+    type();
 }
 
 // ============ SCROLL PROGRESS ============
@@ -911,7 +912,11 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     // Remove Preloader - Use a more robust approach
+    let preloaderRemoved = false;
     const removePreloader = () => {
+        if (preloaderRemoved) return;
+        preloaderRemoved = true;
+
         const preloader = document.getElementById('preloader');
         if (preloader) {
             preloader.classList.add('fade-out');
