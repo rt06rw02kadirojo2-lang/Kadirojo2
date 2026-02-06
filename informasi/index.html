@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Informasi - Desa Kadirojo 2</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/base.css">
+    <link rel="stylesheet" href="../css/animations.css">
+    <link rel="stylesheet" href="../css/components.css">
+    <link rel="stylesheet" href="../css/sections.css">
+    <link rel="stylesheet" href="../css/weather.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+    <link rel="stylesheet" href="../css/theme.css">
+</head>
+
+<body>
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="loader-content">
+            <img src="../images/pp-rt-6.png" alt="Loading..." class="loader-logo">
+            <div class="loader-bar"></div>
+        </div>
+    </div>
+
+    <!-- Cursor Blob -->
+    <div id="cursor-blob"></div>
+
+    <!-- Scroll Progress Bar -->
+    <div id="scroll-progress"></div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <img src="../images/pp-rt-6.png" alt="Logo RT06 RW02 KADIROJO 2" class="logo-img">
+                <span>KADIROJO 2</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="../index.html" class="nav-link">Beranda</a></li>
+                <li><a href="../tentang/index.html" class="nav-link">Tentang</a></li>
+                <li><a href="../kegiatan/index.html" class="nav-link">Kegiatan</a></li>
+                <li><a href="index.html" class="nav-link active">Informasi</a></li>
+                <li><a href="../kontak/index.html" class="nav-link">Kontak</a></li>
+            </ul>
+            <button id="theme-toggle" class="theme-toggle" aria-label="Toggle Dark/Light Mode">
+                <i class="fas fa-moon"></i>
+            </button>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Spacer for Fixed Navbar -->
+    <div style="height: 80px;"></div>
+
+    <!-- Information Board Section -->
+    <section class="info-board-section" style="padding-top: 40px;">
+        <div class="container">
+            <h2>Papan Informasi</h2>
+            <div class="info-board-grid">
+                <div class="info-card" onclick="openInfoModal(this)" data-title="Filosofi Logo RT06 RW02 KADIROJO 2"
+                    data-desc="<strong>Filosofi Logo RT06 RW02 KADIROJO 2</strong><br><br>Logo RT06 RW02 KADIROJO 2 menampilkan bentuk atap rumah yang melambangkan RT06 RW02 KADIROJO 2 sebagai rumah besar bagi seluruh warga. Atap tersebut menjadi simbol perlindungan, kebersamaan, dan rasa aman, di mana setiap warga RT06 RW02 KADIROJO 2 hidup berdampingan dalam suasana kekeluargaan.<br><br>Tulisan <strong>“Guyub”</strong> mencerminkan semangat kebersamaan dan gotong royong warga RT06 RW02 KADIROJO 2. Setiap kegiatan sosial, kerja bakti, maupun perayaan dilakukan dengan rasa saling peduli dan kebersamaan yang kuat.<br><br>Makna <strong>“Rembug”</strong> menggambarkan budaya musyawarah yang dijunjung tinggi di RT06 RW02 KADIROJO 2. Setiap keputusan diambil melalui diskusi bersama, mengedepankan keterbukaan, kebijaksanaan, serta menghargai pendapat seluruh warga.<br><br>Sementara itu, kata <strong>“Rukun”</strong> menjadi landasan utama kehidupan bertetangga di RT06 RW02 KADIROJO 2, yang mencerminkan keharmonisan, toleransi, dan saling menghormati antarwarga tanpa memandang perbedaan.<br><br>Secara keseluruhan, logo RT06 RW02 KADIROJO 2 merepresentasikan lingkungan yang guyub dalam kebersamaan, kuat dalam musyawarah, dan kokoh dalam kerukunan, sebagai wujud komitmen bersama untuk menciptakan RT06 RW02 KADIROJO 2 yang aman, nyaman, dan harmonis">
+                    <div class="info-card-image">
+                        <img src="../images/logo filsop.jpeg" alt="Filosofi Logo RT06 RW02">
+                        <div class="info-card-overlay">
+                            <i class="fas fa-info-circle"></i>
+                        </div>
+                    </div>
+                    <div class="info-card-content">
+                        <h3>Filosofi Logo</h3>
+                        <p>Makna dan filosofi di balik logo RT06 RW02</p>
+                    </div>
+                </div>
+                <div class="info-card" onclick="openInfoModal(this)" data-title="Nomor Darurat"
+                    data-desc="Daftar nomor telepon penting untuk situasi darurat di lingkungan RT06 RW02. Simpan nomor ini untuk keamanan bersama.">
+                    <div class="info-card-image">
+                        <img src="../images/no-darurat-rt-2025.png" alt="Nomor Darurat RT06 RW02">
+                        <div class="info-card-overlay">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                    </div>
+                    <div class="info-card-content">
+                        <h3>Nomor Darurat</h3>
+                        <p>Hubungi segera dalam situasi darurat</p>
+                    </div>
+                </div>
+                <div class="info-card" onclick="openInfoModal(this)" data-title="Struktur Organisasi"
+                    data-desc="Bagan struktur organisasi pengurus RT06 RW02 Periode 2025-2027. Kenali pengurus lingkungan Anda.">
+                    <div class="info-card-image">
+                        <img src="../images/struktur-rt-06.png" alt="Struktur Organisasi RT06 RW02">
+                        <div class="info-card-overlay">
+                            <i class="fas fa-sitemap"></i>
+                        </div>
+                    </div>
+                    <div class="info-card-content">
+                        <h3>Struktur Organisasi</h3>
+                        <p>Hirarki pengelolaan RT06 RW02</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq-section">
+        <div class="container">
+            <h2>Pertanyaan Umum</h2>
+            <div class="faq-grid">
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleAnswer(this)">
+                        <h3>Bagaimana cara untuk membentuk warga agar bisa kompak dan rukun?</h3>
+                        <i class="fas fa-plus"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Anda dapat menghubungi kantor desa kami atau mengisi formulir pendaftaran di halaman kontak.
+                            Tim kami akan membantu proses pendaftaran dan memberikan pelatihan yang diperlukan.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleAnswer(this)">
+                        <h3>Apa saja produk unggulan desa kami?</h3>
+                        <i class="fas fa-plus"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Produk unggulan kami meliputi hasil pertanian organik, kerajinan tangan lokal, dan produk
+                            olahan pangan tradisional yang berkualitas tinggi.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleAnswer(this)">
+                        <h3>Bagaimana kami menjaga kelestarian lingkungan?</h3>
+                        <i class="fas fa-plus"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Kami menerapkan praktik pertanian berkelanjutan, program penanaman pohon, dan manajemen
+                            limbah yang baik untuk menjaga ekosistem desa.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleAnswer(this)">
+                        <h3>Kapan jadwal kegiatan gotong royong kami?</h3>
+                        <i class="fas fa-plus"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Kegiatan gotong royong dilaksanakan setiap bulan atau sesuai dengan kebutuhan. Informasi
+                            jadwal dapat dilihat di papan pengumuman desa atau hubungi RT setempat.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Info Modal -->
+    <div id="info-modal" class="info-modal" onclick="closeInfoModal(event)">
+        <div class="info-modal-content" onclick="event.stopPropagation()">
+            <span class="info-modal-close" onclick="closeInfoModal()">&times;</span>
+            <div class="info-modal-body">
+                <div class="info-modal-image-wrapper">
+                    <img id="info-modal-image"
+                        src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Info">
+                </div>
+                <div class="info-modal-details">
+                    <h3 id="info-modal-title">Title</h3>
+                    <p id="info-modal-desc">Description</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <img src="../images/pp-rt-6.png" alt="Logo RT06 RW02 KADIROJO 2" class="footer-logo-img">
+                    </div>
+                    <h3>RT06 RW02 KADIROJO 2</h3>
+                    <p>Desa Kadirojo 2, Purwomartani, Sleman, Yogyakarta</p>
+                    <p>Membangun masa depan desa yang berkelanjutan dan sejahtera melalui inovasi dan kebersamaan.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Menu</h3>
+                    <ul>
+                        <li><a href="../index.html">Beranda</a></li>
+                        <li><a href="../tentang/index.html">Tentang</a></li>
+                        <li><a href="../kegiatan/index.html">Kegiatan</a></li>
+                        <li><a href="index.html">Informasi</a></li>
+                        <li><a href="../kontak/index.html">Kontak</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Ikuti Kami</h3>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/share/12AVp2278P/" target="_blank" title="Facebook"><i
+                                class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.instagram.com/rt06kadirojo2" target="_blank" title="Instagram"><i
+                                class="fab fa-instagram"></i></a>
+                        <a href="https://wa.me/628991240549" target="_blank" title="WhatsApp"><i
+                                class="fab fa-whatsapp"></i></a>
+                        <a href="https://youtube.com/@rt06kadirojo2?si=GzK1z-dC5i6Ua769" target="_blank"
+                            title="YouTube"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Desa Kadirojo 2. Semua hak dilindungi.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/script.js"></script>
+</body>
+
+</html>

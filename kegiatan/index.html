@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kegiatan - Desa Kadirojo 2</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/base.css">
+    <link rel="stylesheet" href="../css/animations.css">
+    <link rel="stylesheet" href="../css/components.css">
+    <link rel="stylesheet" href="../css/sections.css">
+    <link rel="stylesheet" href="../css/weather.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+    <link rel="stylesheet" href="../css/theme.css">
+</head>
+
+<body>
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="loader-content">
+            <img src="../images/pp-rt-6.png" alt="Loading..." class="loader-logo">
+            <div class="loader-bar"></div>
+        </div>
+    </div>
+
+    <!-- Cursor Blob -->
+    <div id="cursor-blob"></div>
+
+    <!-- Scroll Progress Bar -->
+    <div id="scroll-progress"></div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <img src="../images/pp-rt-6.png" alt="Logo RT 6" class="logo-img">
+                <span>KADIROJO 2</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="../index.html" class="nav-link">Beranda</a></li>
+                <li><a href="../tentang/index.html" class="nav-link">Tentang</a></li>
+                <li><a href="index.html" class="nav-link active">Kegiatan</a></li>
+                <li><a href="../informasi/index.html" class="nav-link">Informasi</a></li>
+                <li><a href="../kontak/index.html" class="nav-link">Kontak</a></li>
+            </ul>
+            <button id="theme-toggle" class="theme-toggle" aria-label="Toggle Dark/Light Mode">
+                <i class="fas fa-moon"></i>
+            </button>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Spacer for Fixed Navbar -->
+    <div style="height: 80px;"></div>
+
+    <!-- Services/Kegiatan Section -->
+    <section id="services" class="services" style="padding-top: 40px;">
+        <div class="container">
+            <h2>Kegiatan & Program Utama</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-tractor"></i>
+                    </div>
+                    <h3>Program Pertanian</h3>
+                    <p>Pelatihan dan pendampingan untuk meningkatkan produktivitas pertanian dengan teknologi modern.
+                    </p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-shopping-bag"></i>
+                    </div>
+                    <h3>Kembangkan UMKM</h3>
+                    <p>Dukungan penuh untuk mengembangkan bisnis lokal menjadi usaha yang berkelanjutan.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>Pemberdayaan Masyarakat</h3>
+                    <p>Program pelatihan keterampilan dan literasi untuk meningkatkan kualitas SDM desa.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-leaf"></i>
+                    </div>
+                    <h3>Konservasi Lingkungan</h3>
+                    <p>Inisiatif menjaga kelestarian alam dan lingkungan hidup yang sehat.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stories & Weather Section -->
+    <section class="stories-weather-section">
+        <div class="container">
+            <div class="stories-weather-wrapper">
+                <!-- Main Stories Section -->
+                <div class="stories-main">
+                    <h2>🎬 Cerita Kegiatan Desa</h2>
+                    <div class="story-viewer">
+                        <div class="story-progress-bar">
+                            <div class="story-progress-fill"></div>
+                        </div>
+                        <img id="story-image" src="" alt="Story" class="story-image">
+                        <div class="story-info">
+                            <p id="story-title" class="story-title"></p>
+                            <p id="story-caption" class="story-caption"></p>
+                        </div>
+                        <div class="story-nav">
+                            <button class="story-btn prev" onclick="previousStory()">
+                                <i class="fas fa-chevron-left"></i>
+                            </button>
+                            <button class="story-btn next" onclick="nextStory()">
+                                <i class="fas fa-chevron-right"></i>
+                            </button>
+                        </div>
+                        <div class="story-dots">
+                            <button class="dot" onclick="goToStory(0)"></button>
+                            <button class="dot" onclick="goToStory(1)"></button>
+                            <button class="dot" onclick="goToStory(2)"></button>
+                            <button class="dot" onclick="goToStory(3)"></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <img src="../images/pp-rt-6.png" alt="Logo RT 6" class="footer-logo-img">
+                    </div>
+                    <h3>RT06 RW02 KADIROJO 2</h3>
+                    <p>Desa Kadirojo 2, Purwomartani, Sleman, Yogyakarta</p>
+                    <p>Membangun masa depan desa yang berkelanjutan dan sejahtera melalui inovasi dan kebersamaan.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Menu</h3>
+                    <ul>
+                        <li><a href="../index.html">Beranda</a></li>
+                        <li><a href="../tentang/index.html">Tentang</a></li>
+                        <li><a href="index.html">Kegiatan</a></li>
+                        <li><a href="../informasi/index.html">Informasi</a></li>
+                        <li><a href="../kontak/index.html">Kontak</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Ikuti Kami</h3>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/share/12AVp2278P/" target="_blank" title="Facebook"><i
+                                class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.instagram.com/rt06kadirojo2" target="_blank" title="Instagram"><i
+                                class="fab fa-instagram"></i></a>
+                        <a href="https://wa.me/628991240549" target="_blank" title="WhatsApp"><i
+                                class="fab fa-whatsapp"></i></a>
+                        <a href="https://youtube.com/@rt06kadirojo2?si=GzK1z-dC5i6Ua769" target="_blank"
+                            title="YouTube"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Desa Kadirojo 2. Semua hak dilindungi.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/script.js"></script>
+</body>
+
+</html>

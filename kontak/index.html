@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kontak Kami - Desa Kadirojo 2</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/base.css">
+    <link rel="stylesheet" href="../css/animations.css">
+    <link rel="stylesheet" href="../css/components.css">
+    <link rel="stylesheet" href="../css/sections.css">
+    <link rel="stylesheet" href="../css/weather.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+    <link rel="stylesheet" href="../css/theme.css">
+</head>
+
+<body>
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="loader-content">
+            <img src="../images/pp-rt-6.png" alt="Loading..." class="loader-logo">
+            <div class="loader-bar"></div>
+        </div>
+    </div>
+
+    <!-- Cursor Blob -->
+    <div id="cursor-blob"></div>
+
+    <!-- Scroll Progress Bar -->
+    <div id="scroll-progress"></div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <img src="../images/pp-rt-6.png" alt="Logo RT06 RW02 KADIROJO 2" class="logo-img">
+                <span>KADIROJO 2</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="../index.html" class="nav-link">Beranda</a></li>
+                <li><a href="../tentang/index.html" class="nav-link">Tentang</a></li>
+                <li><a href="../kegiatan/index.html" class="nav-link">Kegiatan</a></li>
+                <li><a href="../informasi/index.html" class="nav-link">Informasi</a></li>
+                <li><a href="index.html" class="nav-link active">Kontak</a></li>
+            </ul>
+            <button id="theme-toggle" class="theme-toggle" aria-label="Toggle Dark/Light Mode">
+                <i class="fas fa-moon"></i>
+            </button>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Spacer for Fixed Navbar -->
+    <div style="height: 80px;"></div>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact" style="padding-top: 40px;">
+        <div class="container">
+            <div class="contact-header">
+                <h2>💬 Hubungi Kami</h2>
+                <p class="contact-subtitle">Punya pertanyaan? Hubungi kami langsung melalui salah satu cara di bawah</p>
+            </div>
+
+            <div class="contact-wrapper">
+                <!-- Quick Contact Icons -->
+                <div class="quick-contact">
+                    <a href="https://wa.me/628991240549" target="_blank" class="contact-icon-btn"
+                        title="Hubungi WhatsApp">
+                        <div class="icon-wrapper whatsapp">
+                            <i class="fab fa-whatsapp"></i>
+                            <span class="tooltip">💬 WhatsApp</span>
+                        </div>
+                        <span class="icon-label">WhatsApp</span>
+                    </a>
+                    <a href="mailto:Kadirojo2rt06@gmail.com" class="contact-icon-btn" title="Kirim Email">
+                        <div class="icon-wrapper email">
+                            <i class="fas fa-envelope"></i>
+                            <span class="tooltip">✉️ Kirim Email</span>
+                        </div>
+                        <span class="icon-label">Email</span>
+                    </a>
+                    <a href="https://www.instagram.com/rt06kadirojo2" target="_blank" class="contact-icon-btn"
+                        title="Ikuti Instagram">
+                        <div class="icon-wrapper instagram">
+                            <i class="fab fa-instagram"></i>
+                            <span class="tooltip">📸 Instagram</span>
+                        </div>
+                        <span class="icon-label">Instagram</span>
+                    </a>
+                </div>
+
+                <!-- Contact Form -->
+                <div class="contact-form-wrapper">
+                    <div class="form-header">
+                        <h3>📝 Kirim Pesan</h3>
+                        <p>Tulis pesan Anda dan kami akan merespon segera</p>
+                    </div>
+                    <form class="contact-form" onsubmit="sendFormToEmail(event)">
+                        <div class="form-group">
+                            <label for="name">Nama Lengkap</label>
+                            <input type="text" id="name" name="name" placeholder="Masukkan nama Anda" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" placeholder="Masukkan email Anda" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">No. Telepon (Opsional)</label>
+                            <input type="tel" id="phone" name="phone" placeholder="Masukkan no. telepon">
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Pesan</label>
+                            <textarea id="message" name="message" placeholder="Tulis pesan Anda di sini..." rows="6"
+                                required></textarea>
+                        </div>
+                        <div class="contact-actions">
+                            <button type="submit" class="btn btn-submit-new">
+                                <span class="btn-text">✉️ Kirim Email</span>
+                                <span class="btn-icon">→</span>
+                            </button>
+                            <button type="button" onclick="sendFormToWhatsApp(event)" class="btn btn-whatsapp-direct">
+                                <span class="btn-text">💬 WhatsApp</span>
+                                <span class="btn-icon">→</span>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <img src="../images/pp-rt-6.png" alt="Logo RT06 RW02 KADIROJO 2" class="footer-logo-img">
+                    </div>
+                    <h3>RT06 RW02 KADIROJO 2</h3>
+                    <p>Desa Kadirojo 2, Purwomartani, Sleman, Yogyakarta</p>
+                    <p>Membangun masa depan desa yang berkelanjutan dan sejahtera melalui inovasi dan kebersamaan.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Menu</h3>
+                    <ul>
+                        <li><a href="../index.html">Beranda</a></li>
+                        <li><a href="../tentang/index.html">Tentang</a></li>
+                        <li><a href="../kegiatan/index.html">Kegiatan</a></li>
+                        <li><a href="../informasi/index.html">Informasi</a></li>
+                        <li><a href="index.html">Kontak</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Ikuti Kami</h3>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/share/12AVp2278P/" target="_blank" title="Facebook"><i
+                                class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.instagram.com/rt06kadirojo2" target="_blank" title="Instagram"><i
+                                class="fab fa-instagram"></i></a>
+                        <a href="https://wa.me/628991240549" target="_blank" title="WhatsApp"><i
+                                class="fab fa-whatsapp"></i></a>
+                        <a href="https://youtube.com/@rt06kadirojo2?si=GzK1z-dC5i6Ua769" target="_blank"
+                            title="YouTube"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Desa Kadirojo 2. Semua hak dilindungi.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Success Modal -->
+    <div id="success-modal" class="info-modal" onclick="closeSuccessModal(event)">
+        <div class="info-modal-content modern-modal success-modal-content" onclick="event.stopPropagation()">
+            <span class="denah-modal-close" onclick="closeSuccessModal()">&times;</span>
+            <div class="modal-success-body">
+                <div class="success-icon-wrapper">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <h2>Pesan Terkirim!</h2>
+                <p>Terima kasih telah menghubungi kami. Pesan Anda telah kami terima dan akan segera kami tindak
+                    lanjuti.</p>
+                <button class="btn btn-primary" onclick="closeSuccessModal()">Tutup</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/script.js"></script>
+</body>
+
+</html>
