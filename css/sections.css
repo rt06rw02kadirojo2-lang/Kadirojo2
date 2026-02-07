@@ -801,10 +801,13 @@
 .modal-image-side {
     flex: 1;
     min-width: 300px;
-    background: #000;
+    background: #0f172a;
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
+    overflow: hidden;
+    /* Critical for panning */
 }
 
 .modal-image-side img {
@@ -878,12 +881,28 @@
     border: 1px solid rgba(255, 255, 255, 0.1);
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
     cursor: pointer;
-    transition: all 0.4s ease;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
 }
 
 .denah-card-modern:hover {
     border-color: var(--primary-color);
-    transform: translateY(-5px);
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 30px 60px rgba(99, 102, 241, 0.25);
+}
+
+.denah-card-modern::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at center, rgba(99, 102, 241, 0.15), transparent);
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    pointer-events: none;
+}
+
+.denah-card-modern:hover::after {
+    opacity: 1;
 }
 
 .denah-image-wrapper {
@@ -896,11 +915,11 @@
 .denah-image {
     width: 100%;
     display: block;
-    transition: transform 0.5s ease;
+    transition: transform 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
 .denah-card-modern:hover .denah-image {
-    transform: scale(1.02);
+    transform: scale(1.1);
 }
 
 .denah-marker {
@@ -1396,27 +1415,29 @@ body.light-mode .dot.entry {
 
 .denah-modal-close {
     position: absolute;
-    top: 20px;
-    right: 20px;
-    font-size: 36px;
+    top: 25px;
+    right: 25px;
+    font-size: 28px;
     color: white;
     cursor: pointer;
-    z-index: 10;
-    background: rgba(0, 0, 0, 0.5);
-    width: 50px;
-    height: 50px;
+    z-index: 100;
+    background: rgba(0, 0, 0, 0.6);
+    width: 45px;
+    height: 45px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: all 0.3s ease;
-    border: 2px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(8px);
 }
 
 .denah-modal-close:hover {
-    background: rgba(239, 68, 68, 0.8);
-    transform: rotate(90deg);
-    border-color: rgba(239, 68, 68, 0.5);
+    background: var(--primary-color);
+    transform: rotate(90deg) scale(1.1);
+    border-color: white;
+    box-shadow: 0 0 20px rgba(99, 102, 241, 0.5);
 }
 
 .denah-modal-header {

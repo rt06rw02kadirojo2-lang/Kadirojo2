@@ -13,7 +13,7 @@ function toggleWeatherDetail(element) {
 function copyToClipboard(text) {
     navigator.clipboard.writeText(text).then(() => {
         // Show toast notification
-        showToast('Berhasil disalin! ✓');
+        showToast('<i class="fas fa-check"></i> Berhasil disalin!');
     }).catch(() => {
         alert('Gagal menyalin teks');
     });
@@ -34,7 +34,7 @@ function sendFormToWhatsApp(event) {
     const message = document.getElementById('message').value;
 
     if (!name || !message) {
-        showToast('Mohon isi nama dan pesan Anda! ⚠️');
+        showToast('<i class="fas fa-exclamation-triangle"></i> Mohon isi nama dan pesan Anda!');
         return;
     }
 
@@ -61,13 +61,13 @@ function sendFormToEmail(event) {
     const originalBtnText = submitBtn ? submitBtn.innerHTML : 'Kirim Email';
 
     if (!name || !message || !email) {
-        showToast('Mohon isi nama, email, dan pesan! ⚠️');
+        showToast('<i class="fas fa-exclamation-triangle"></i> Mohon isi nama, email, dan pesan!');
         return;
     }
 
     // Show loading state
     if (submitBtn) {
-        submitBtn.innerHTML = '<span class="btn-text">Mengirim...</span><span class="btn-icon">⏳</span>';
+        submitBtn.innerHTML = '<span class="btn-text">Mengirim...</span><span class="btn-icon"><i class="fas fa-spinner fa-spin"></i></span>';
         submitBtn.disabled = true;
     }
 
@@ -91,12 +91,12 @@ function sendFormToEmail(event) {
                 openSuccessModal();
                 event.target.reset(); // Reset form
             } else {
-                showToast('Gagal mengirim pesan. Silakan coba lagi. ❌');
+                showToast('<i class="fas fa-times-circle"></i> Gagal mengirim pesan. Silakan coba lagi.');
             }
         })
         .catch(error => {
             console.error('Error:', error);
-            showToast('Terjadi kesalahan koneksi. ❌');
+            showToast('<i class="fas fa-wifi"></i> Terjadi kesalahan koneksi.');
         })
         .finally(() => {
             // Restore button state
@@ -754,27 +754,134 @@ function closeEmergencyModal(event) {
     }
 }
 
-// ============ DENAH ZOOM MANAGEMENT ============
+// ============ DENAH ZOOM & PAN MANAGEMENT ============
 let denahZoomLevel = 1;
-function zoomDenah(scale) {
-    denahZoomLevel *= scale;
-    // Limit zoom
-    if (denahZoomLevel < 0.5) denahZoomLevel = 0.5;
-    if (denahZoomLevel > 3) denahZoomLevel = 3;
+let isPanning = false;
+let startX, startY;
+let translateX = 0, translateY = 0;
 
+function updateDenahTransform() {
     const img = document.getElementById('denah-modal-img');
     if (img) {
-        img.style.transform = `scale(${denahZoomLevel})`;
-        img.style.transition = 'transform 0.3s ease';
+        img.style.transform = `translate(${translateX}px, ${translateY}px) scale(${denahZoomLevel})`;
+        img.style.cursor = denahZoomLevel > 1 ? (isPanning ? 'grabbing' : 'grab') : 'zoom-in';
+        img.style.transition = isPanning ? 'none' : 'transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1)';
     }
+}
+
+function applyBoundaries() {
+    if (denahZoomLevel <= 1) {
+        translateX = 0;
+        translateY = 0;
+        return;
+    }
+
+    const wrapper = document.querySelector('.modal-image-side.zoomable');
+    if (!wrapper) return;
+
+    const rect = wrapper.getBoundingClientRect();
+    const limitX = (rect.width * (denahZoomLevel - 1)) / 2;
+    const limitY = (rect.height * (denahZoomLevel - 1)) / 2;
+
+    translateX = Math.max(Math.min(translateX, limitX), -limitX);
+    translateY = Math.max(Math.min(translateY, limitY), -limitY);
+}
+
+function zoomDenah(scale, mouseX, mouseY) {
+    const oldZoom = denahZoomLevel;
+    denahZoomLevel *= scale;
+
+    // Limit zoom
+    if (denahZoomLevel < 1) denahZoomLevel = 1;
+    if (denahZoomLevel > 5) denahZoomLevel = 5;
+
+    // Zoom-to-cursor logic
+    if (mouseX !== undefined && mouseY !== undefined && denahZoomLevel !== oldZoom) {
+        const wrapper = document.querySelector('.modal-image-side.zoomable');
+        const rect = wrapper.getBoundingClientRect();
+
+        const relX = mouseX - rect.left - rect.width / 2;
+        const relY = mouseY - rect.top - rect.height / 2;
+
+        const ratio = denahZoomLevel / oldZoom;
+        translateX = relX - (relX - translateX) * ratio;
+        translateY = relY - (relY - translateY) * ratio;
+    }
+
+    applyBoundaries();
+    updateDenahTransform();
 }
 
 function resetZoomDenah() {
     denahZoomLevel = 1;
+    translateX = 0;
+    translateY = 0;
+    updateDenahTransform();
+}
+
+function initDenahInteractions() {
     const img = document.getElementById('denah-modal-img');
-    if (img) {
-        img.style.transform = `scale(1)`;
-    }
+    const wrapper = document.querySelector('.modal-image-side.zoomable');
+
+    if (!img || !wrapper) return;
+
+    // Mouse Events for Panning
+    wrapper.addEventListener('mousedown', (e) => {
+        if (denahZoomLevel <= 1) return;
+        isPanning = true;
+        startX = e.clientX - translateX;
+        startY = e.clientY - translateY;
+        updateDenahTransform();
+    });
+
+    window.addEventListener('mousemove', (e) => {
+        if (!isPanning) return;
+        e.preventDefault();
+        translateX = e.clientX - startX;
+        translateY = e.clientY - startY;
+
+        applyBoundaries();
+        updateDenahTransform();
+    });
+
+    window.addEventListener('mouseup', () => {
+        if (isPanning) {
+            isPanning = false;
+            updateDenahTransform();
+        }
+    });
+
+    // Mouse Wheel Zoom
+    wrapper.addEventListener('wheel', (e) => {
+        e.preventDefault();
+        const delta = e.deltaY > 0 ? 0.94 : 1.06;
+        zoomDenah(delta, e.clientX, e.clientY);
+    }, { passive: false });
+
+    // Touch Events for Mobile
+    let lastTouchX, lastTouchY;
+    wrapper.addEventListener('touchstart', (e) => {
+        if (e.touches.length === 1 && denahZoomLevel > 1) {
+            isPanning = true;
+            lastTouchX = e.touches[0].clientX - translateX;
+            lastTouchY = e.touches[0].clientY - translateY;
+        }
+    });
+
+    wrapper.addEventListener('touchmove', (e) => {
+        if (isPanning && e.touches.length === 1) {
+            e.preventDefault();
+            translateX = e.touches[0].clientX - lastTouchX;
+            translateY = e.touches[0].clientY - lastTouchY;
+            applyBoundaries();
+            updateDenahTransform();
+        }
+    }, { passive: false });
+
+    wrapper.addEventListener('touchend', () => {
+        isPanning = false;
+        updateDenahTransform();
+    });
 }
 
 // Update initialization to set up modal listeners
@@ -947,6 +1054,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Initialize Ripple Effects
     initRippleEffects();
+
+    // Initialize Denah Modal interactions
+    initDenahInteractions();
 
     // Re-initialize ripple effects after dynamic content loads
     setTimeout(initRippleEffects, 2000);
