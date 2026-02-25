@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
     <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/ambient-bg.css">
     <link rel="stylesheet" href="css/animations.css">
     <link rel="stylesheet" href="css/components.css">
     <link rel="stylesheet" href="css/sections.css">
@@ -23,6 +24,19 @@
 </head>
 
 <body>
+    <!-- Ambient Rural Background -->
+    <div class="ambient-scene">
+        <div class="ambient-image"></div>
+        <div class="ambient-overlay"></div>
+        <div class="ambient-clouds">
+            <div class="cloud"></div>
+            <div class="cloud"></div>
+            <div class="cloud"></div>
+        </div>
+        <div class="ambient-rays"></div>
+        <div class="ambient-leaves" id="ambient-leaves"></div>
+    </div>
+
     <!-- Preloader -->
     <div id="preloader">
         <div class="loader-content">
@@ -37,11 +51,7 @@
     <!-- Scroll Progress Bar -->
     <div id="scroll-progress"></div>
 
-    <!-- Floating Weather Widget -->
-    <div class="floating-weather" onclick="openWeatherModal()">
 
-        <p class="floating-weather-label">Cuaca</p>
-    </div>
 
     <!-- Navigation -->
     <nav class="navbar">

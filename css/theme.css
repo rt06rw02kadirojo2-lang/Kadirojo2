@@ -53,12 +53,8 @@
 
 /* ============ LIGHT MODE STYLES ============ */
 body.light-mode {
-    background-color: #f8fafc;
-    background-image:
-        radial-gradient(at 0% 0%, rgba(99, 102, 241, 0.08) 0px, transparent 50%),
-        radial-gradient(at 100% 0%, rgba(168, 85, 247, 0.08) 0px, transparent 50%),
-        radial-gradient(at 100% 100%, rgba(99, 102, 241, 0.08) 0px, transparent 50%),
-        radial-gradient(at 0% 100%, rgba(168, 85, 247, 0.08) 0px, transparent 50%);
+    background-color: transparent;
+    background-image: none;
     color: #1e293b;
 }
 
@@ -70,9 +66,9 @@ body.light-mode {
     --text-tertiary: #64748b;
     --dark-color: #ffffff;
     --light-color: #0a0a0a;
-    --border-color: #e2e8f0;
-    --bg-card: rgba(255, 255, 255, 1);
-    --bg-glass: rgba(255, 255, 255, 0.95);
+    --border-color: rgba(99, 102, 241, 0.2);
+    --bg-card: rgba(255, 255, 255, 0.1);
+    --bg-glass: rgba(255, 255, 255, 0.15);
 }
 
 /* Navbar Light Mode */
@@ -174,8 +170,9 @@ body.light-mode .weather-widget-section,
 body.light-mode .faq-section,
 body.light-mode .denah-section,
 body.light-mode .info-board-section {
-    background: rgba(255, 255, 255, 0.95);
+    background: var(--bg-card);
     border-color: rgba(99, 102, 241, 0.1);
+    backdrop-filter: blur(12px);
 }
 
 body.light-mode .section-header h2 {
@@ -208,8 +205,9 @@ body.light-mode .about-item,
 body.light-mode .service-card,
 body.light-mode .faq-item,
 body.light-mode .info-card {
-    background: rgba(255, 255, 255, 0.95);
+    background: var(--bg-card);
     border-color: rgba(99, 102, 241, 0.15);
+    backdrop-filter: blur(10px);
 }
 
 body.light-mode .about-item:hover,
@@ -224,9 +222,10 @@ body.light-mode .emergency-item,
 body.light-mode .denah-card-modern,
 body.light-mode .denah-modal-content,
 body.light-mode .denah-legend {
-    background: rgba(255, 255, 255, 1);
+    background: var(--bg-glass);
     border-color: rgba(99, 102, 241, 0.15);
     color: #1e293b;
+    backdrop-filter: blur(10px);
 }
 
 body.light-mode .legend-item {
@@ -433,17 +432,7 @@ body.light-mode .weather-detail-box {
     background: linear-gradient(135deg, rgba(99, 102, 241, 0.08) 0%, rgba(168, 85, 247, 0.08) 100%);
 }
 
-/* Floating Weather Widget Light Mode */
-body.light-mode .floating-weather {
-    background: rgba(255, 255, 255, 0.95);
-    border-color: rgba(99, 102, 241, 0.2);
-}
 
-body.light-mode .floating-temp,
-body.light-mode .floating-location,
-body.light-mode .floating-weather-label {
-    color: #1e293b !important;
-}
 
 /* Contact Icons Light Mode */
 body.light-mode .contact-icon-btn .icon-wrapper {

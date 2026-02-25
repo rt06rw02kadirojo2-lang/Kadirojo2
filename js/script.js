@@ -457,14 +457,7 @@ function updateWeather(temp, humidity, code, wind) {
 
     updateWeatherIconDisplay(code);
 
-    // Update floating weather widget
-    const elFloatingTemp = document.getElementById('floating-temp');
-    if (elFloatingTemp) elFloatingTemp.textContent = Math.round(temp) + '°C';
 
-    const floatingIcon = document.getElementById('floating-weather-icon');
-    if (floatingIcon) {
-        floatingIcon.className = getWeatherIcon(code);
-    }
 
     // Additional elements for new layout
     const elHumidityDisplay = document.getElementById('humidity-display');
@@ -1058,9 +1051,38 @@ document.addEventListener('DOMContentLoaded', function () {
     // Initialize Denah Modal interactions
     initDenahInteractions();
 
+    // Initialize Ambient Leaves
+    initAmbientLeaves();
+
     // Re-initialize ripple effects after dynamic content loads
     setTimeout(initRippleEffects, 2000);
 });
+
+// ============ AMBIENT EFFECTS ============
+function initAmbientLeaves() {
+    const container = document.getElementById('ambient-leaves');
+    if (!container) return;
+
+    const leafCount = 15;
+    for (let i = 0; i < leafCount; i++) {
+        const leaf = document.createElement('div');
+        leaf.className = 'leaf';
+
+        // Randomize positions and animations
+        const startX = Math.random() * 100;
+        const duration = 10 + Math.random() * 20;
+        const delay = Math.random() * -20;
+        const size = 10 + Math.random() * 10;
+
+        leaf.style.left = startX + 'vw';
+        leaf.style.width = size + 'px';
+        leaf.style.height = size + 'px';
+        leaf.style.animationDuration = duration + 's';
+        leaf.style.animationDelay = delay + 's';
+
+        container.appendChild(leaf);
+    }
+}
 
 // ============ THEME MANAGEMENT ============
 function initTheme() {

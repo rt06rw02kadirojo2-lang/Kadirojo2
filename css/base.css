@@ -15,11 +15,11 @@
     --accent-pink: #ec4899;
 
     /* Background Colors */
-    --bg-primary: #0a0a0a;
-    --bg-secondary: #1a1a1a;
-    --bg-tertiary: #141414;
-    --bg-card: rgba(20, 20, 20, 0.85);
-    --bg-glass: rgba(30, 30, 30, 0.8);
+    --bg-primary: transparent;
+    --bg-secondary: rgba(15, 15, 15, 0.1);
+    --bg-tertiary: rgba(20, 20, 20, 0.1);
+    --bg-card: rgba(15, 15, 15, 0.1);
+    --bg-glass: rgba(20, 20, 20, 0.15);
 
     /* Text Colors */
     --text-primary: #ffffff;
@@ -57,14 +57,10 @@ html {
 body {
     font-family: var(--font-body);
     color: var(--text-color);
-    background-color: var(--bg-primary);
+    background-color: transparent;
 
-    /* Feedmusic-style Deep Void Background */
-    background-image:
-        radial-gradient(circle at 50% 0%, rgba(20, 30, 60, 0.4) 0%, transparent 60%),
-        radial-gradient(circle at 100% 0%, rgba(43, 255, 0, 0.03) 0%, transparent 40%);
-    background-attachment: fixed;
-    background-size: 100% 100%;
+    /* Feedmusic-style Deep Void Background removed to show ambient bg */
+    background-image: none;
 
     line-height: 1.6;
     font-size: 16px;
