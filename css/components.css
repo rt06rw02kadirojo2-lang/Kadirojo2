@@ -438,6 +438,12 @@
     background: transparent !important;
 }
 
+.ql-editor {
+    user-select: text !important;
+    -webkit-user-select: text !important;
+    pointer-events: auto !important;
+}
+
 #rapat-editor {
     min-height: 250px;
     max-height: 400px;
