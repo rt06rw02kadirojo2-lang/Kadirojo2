@@ -1227,3 +1227,160 @@ document.addEventListener('DOMContentLoaded', () => {
         revealObserver.observe(el);
     });
 });
+
+// ============ PENCATATAN RAPAT MODAL FUNCTIONS ============
+let quillRapatEditor;
+
+function initRapatEditor() {
+    if (!quillRapatEditor && document.getElementById('rapat-editor')) {
+        quillRapatEditor = new Quill('#rapat-editor', {
+            theme: 'snow',
+            placeholder: 'Tulis notulensi rapat di sini...',
+            modules: {
+                toolbar: [
+                    [{ 'header': [1, 2, 3, false] }],
+                    ['bold', 'italic', 'underline', 'strike'],
+                    [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+                    [{ 'color': [] }, { 'background': [] }],
+                    ['link'],
+                    ['clean']
+                ]
+            }
+        });
+        
+        // Set the current date as default
+        const dateInput = document.getElementById('rapat-tanggal');
+        if (dateInput && !dateInput.value) {
+            const today = new Date();
+            const yyyy = today.getFullYear();
+            const mm = String(today.getMonth() + 1).padStart(2, '0');
+            const dd = String(today.getDate()).padStart(2, '0');
+            dateInput.value = `${yyyy}-${mm}-${dd}`;
+        }
+    }
+}
+
+function openRapatModal(event) {
+    if (event) event.preventDefault();
+    const modal = document.getElementById('rapat-modal');
+    if (modal) {
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+        initRapatEditor();
+    }
+}
+
+function closeRapatModal(event) {
+    if (event && event.target && event.target.id !== 'rapat-modal') {
+        const isCloseBtn = event.target.classList.contains('denah-modal-close') ||
+            event.target.closest('.denah-modal-close');
+        if (!isCloseBtn) return;
+    }
+
+    const modal = document.getElementById('rapat-modal');
+    if (modal) {
+        modal.classList.remove('active');
+        document.body.style.overflow = 'auto';
+    }
+}
+
+// Prepare export container with correct styling
+function prepareRapatExport(plainTextMode = false) {
+    const tanggal = document.getElementById('rapat-tanggal').value;
+    const judul = document.getElementById('rapat-judul').value || 'Tanpa Judul';
+    
+    // Format date nicely
+    const dateObj = new Date(tanggal);
+    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    const formattedDate = dateObj.toLocaleDateString('id-ID', options);
+    
+    let contentHtml = '';
+    let contentText = '';
+    
+    if (quillRapatEditor) {
+        contentHtml = quillRapatEditor.root.innerHTML;
+        contentText = quillRapatEditor.getText();
+    }
+    
+    if (plainTextMode) {
+        return {
+            date: formattedDate,
+            title: judul,
+            text: contentText
+        };
+    }
+    
+    document.getElementById('export-tanggal').innerText = formattedDate;
+    document.getElementById('export-judul').innerText = `NOTULENSI RAPAT: ${judul}`;
+    document.getElementById('export-content').innerHTML = contentHtml;
+    
+    return document.getElementById('rapat-export-container');
+}
+
+function shareRapatWA() {
+    const data = prepareRapatExport(true);
+    if (!data.text.trim()) {
+        showToast('<i class="fas fa-exclamation-triangle"></i> Catatan rapat masih kosong!');
+        return;
+    }
+    
+    const text = `*NOTULENSI RAPAT*%0A` +
+        `*Judul:* ${data.title}%0A` +
+        `*Tanggal:* ${data.date}%0A%0A` +
+        `*Hasil Rapat:*%0A${window.encodeURIComponent(data.text)}`;
+
+    window.open(`https://wa.me/?text=${text}`, '_blank');
+}
+
+function exportRapatPDF() {
+    if (typeof html2pdf === 'undefined') {
+        showToast('<i class="fas fa-exclamation-triangle"></i> Pustaka PDF belum dimuat. Coba lagi.');
+        return;
+    }
+
+    const element = prepareRapatExport(false);
+    element.style.display = 'block'; // Make visible temporarily
+    
+    const judul = document.getElementById('rapat-judul').value || 'Notulensi';
+    const tanggal = document.getElementById('rapat-tanggal').value || 'hari-ini';
+    
+    const opt = {
+        margin:       15,
+        filename:     `${judul.replace(/[^a-z0-9]/gi, '_').toLowerCase()}_${tanggal}.pdf`,
+        image:        { type: 'jpeg', quality: 0.98 },
+        html2canvas:  { scale: 2, useCORS: true },
+        jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
+    };
+
+    html2pdf().set(opt).from(element).save().then(() => {
+        element.style.display = 'none'; // Hide again
+        showToast('<i class="fas fa-check"></i> PDF Berhasil Disimpan');
+    });
+}
+
+function exportRapatWord() {
+    const element = prepareRapatExport(false);
+    
+    // Create a complete HTML string including necessary Word namespaces
+    const header = "<html xmlns:o='urn:schemas-microsoft-com:office:office' " +
+        "xmlns:w='urn:schemas-microsoft-com:office:word' " +
+        "xmlns='http://www.w3.org/TR/REC-html40'>" +
+        "<head><meta charset='utf-8'><title>Export HTML to Word</title></head><body>";
+    const footer = "</body></html>";
+    const sourceHTML = header + element.innerHTML + footer;
+    
+    const source = 'data:application/vnd.ms-word;charset=utf-8,' + encodeURIComponent(sourceHTML);
+    const fileDownload = document.createElement("a");
+    
+    document.body.appendChild(fileDownload);
+    fileDownload.href = source;
+    
+    const judul = document.getElementById('rapat-judul').value || 'Notulensi';
+    const tanggal = document.getElementById('rapat-tanggal').value || 'hari-ini';
+    fileDownload.download = `${judul.replace(/[^a-z0-9]/gi, '_').toLowerCase()}_${tanggal}.doc`;
+    
+    fileDownload.click();
+    document.body.removeChild(fileDownload);
+    
+    showToast('<i class="fas fa-check"></i> Word Berhasil Disimpan');
+}
