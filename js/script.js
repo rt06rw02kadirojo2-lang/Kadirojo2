@@ -1311,7 +1311,7 @@ function prepareRapatExport(plainTextMode = false) {
     }
     
     document.getElementById('export-tanggal').innerText = formattedDate;
-    document.getElementById('export-judul').innerText = `NOTULENSI RAPAT: ${judul}`;
+    document.getElementById('export-judul').innerText = judul;
     document.getElementById('export-content').innerHTML = contentHtml;
     
     return document.getElementById('rapat-export-container');
