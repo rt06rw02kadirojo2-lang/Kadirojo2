@@ -429,6 +429,11 @@
     color: var(--text-primary) !important;
 }
 
+#rapat-export-container,
+#rapat-export-container * {
+    color: #000 !important;
+}
+
 /* Editor content area */
 .ql-container.ql-snow {
     border: none !important;
