@@ -1248,15 +1248,76 @@ function initRapatEditor() {
             }
         });
         
-        // Set the current date as default
         const dateInput = document.getElementById('rapat-tanggal');
-        if (dateInput && !dateInput.value) {
+        const judulInput = document.getElementById('rapat-judul');
+
+        // Load saved data from localStorage if exists
+        const savedDate = localStorage.getItem('rapat_tanggal');
+        const savedJudul = localStorage.getItem('rapat_judul');
+        const savedContent = localStorage.getItem('rapat_content');
+
+        if (dateInput) {
+            if (savedDate) {
+                dateInput.value = savedDate;
+            } else if (!dateInput.value) {
+                const today = new Date();
+                const yyyy = today.getFullYear();
+                const mm = String(today.getMonth() + 1).padStart(2, '0');
+                const dd = String(today.getDate()).padStart(2, '0');
+                dateInput.value = `${yyyy}-${mm}-${dd}`;
+            }
+        }
+
+        if (savedJudul && judulInput) {
+            judulInput.value = savedJudul;
+        }
+
+        if (savedContent) {
+            quillRapatEditor.root.innerHTML = savedContent;
+        }
+
+        // Add event listeners to save data on every change
+        quillRapatEditor.on('text-change', function() {
+            localStorage.setItem('rapat_content', quillRapatEditor.root.innerHTML);
+        });
+
+        if (judulInput) {
+            judulInput.addEventListener('input', function() {
+                localStorage.setItem('rapat_judul', this.value);
+            });
+        }
+
+        if (dateInput) {
+            dateInput.addEventListener('change', function() {
+                localStorage.setItem('rapat_tanggal', this.value);
+            });
+        }
+    }
+}
+
+// Function to clear all meeting notes data from memory and UI
+function clearRapatData() {
+    if (confirm('Apakah Anda yakin ingin menghapus seluruh catatan rapat saat ini dan memulai file baru?')) {
+        localStorage.removeItem('rapat_content');
+        localStorage.removeItem('rapat_judul');
+        localStorage.removeItem('rapat_tanggal');
+        
+        document.getElementById('rapat-judul').value = '';
+        if (quillRapatEditor) {
+            quillRapatEditor.root.innerHTML = '';
+        }
+        
+        // Reset date to today
+        const dateInput = document.getElementById('rapat-tanggal');
+        if (dateInput) {
             const today = new Date();
             const yyyy = today.getFullYear();
             const mm = String(today.getMonth() + 1).padStart(2, '0');
             const dd = String(today.getDate()).padStart(2, '0');
             dateInput.value = `${yyyy}-${mm}-${dd}`;
         }
+        
+        showToast('<i class="fas fa-trash"></i> Catatan telah dibersihkan');
     }
 }
 
