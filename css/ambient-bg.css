@@ -21,6 +21,7 @@
     background-position: center;
     filter: brightness(0.7) saturate(1.2);
     animation: kenBurns 40s ease-in-out infinite alternate;
+    transition: filter 2s ease;
 }
 
 .ambient-overlay {
@@ -166,4 +167,145 @@
     100% {
         opacity: 0.8;
     }
+}
+
+/* ============ DYNAMIC TIME & WEATHER OVERLAYS ============ */
+.ambient-time-overlay,
+.ambient-weather-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none;
+    transition: background 2s ease-in-out, opacity 2s ease;
+}
+
+/* Time States */
+.ambient-scene[data-time="morning"] .ambient-time-overlay {
+    background: linear-gradient(180deg, rgba(255, 140, 0, 0.2) 0%, rgba(255, 200, 100, 0.1) 100%);
+}
+
+.ambient-scene[data-time="day"] .ambient-time-overlay {
+    background: transparent;
+}
+
+.ambient-scene[data-time="afternoon"] .ambient-time-overlay {
+    background: linear-gradient(180deg, rgba(255, 70, 0, 0.2) 0%, rgba(100, 30, 80, 0.2) 100%);
+}
+
+.ambient-scene[data-time="night"] .ambient-time-overlay {
+    background: linear-gradient(180deg, rgba(5, 15, 35, 0.8) 0%, rgba(10, 25, 50, 0.6) 100%);
+}
+
+.ambient-scene[data-time="night"] .ambient-image {
+    filter: brightness(0.4) saturate(0.8);
+}
+
+/* Weather States */
+.ambient-scene[data-weather="hot"] .ambient-weather-overlay {
+    background: radial-gradient(circle at 70% 20%, rgba(255, 230, 100, 0.45) 0%, rgba(255, 120, 0, 0.15) 50%, transparent 80%);
+}
+
+.ambient-scene[data-weather="hot"] .ambient-image {
+    filter: brightness(0.9) saturate(1.4) contrast(1.1);
+}
+
+.ambient-scene[data-weather="hot"] .ambient-rays {
+    background: radial-gradient(circle at 70% 20%, rgba(255, 255, 200, 0.5) 0%, transparent 60%);
+    animation: lightPulse 3s ease-in-out infinite alternate;
+    display: block;
+}
+
+.ambient-scene[data-weather="rain"] .ambient-weather-overlay {
+    background: rgba(80, 90, 100, 0.4);
+}
+
+.ambient-scene[data-weather="rain"] .ambient-image {
+    filter: brightness(0.5) saturate(0.6);
+}
+
+/* Darken clouds during rain/night */
+.ambient-scene[data-weather="rain"] .cloud,
+.ambient-scene[data-time="night"] .cloud {
+    background: radial-gradient(circle at center, rgba(150, 150, 150, 0.4) 0%, transparent 70%);
+    opacity: 0.2;
+}
+
+/* Hide sun rays during rain/night */
+.ambient-scene[data-weather="rain"] .ambient-rays,
+.ambient-scene[data-time="night"] .ambient-rays {
+    display: none;
+}
+
+/* ============ RAIN ANIMATION ============ */
+.ambient-rain {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 3;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 1s ease;
+    overflow: hidden;
+}
+
+.ambient-scene[data-weather="rain"] .ambient-rain {
+    opacity: 1;
+}
+
+.drop {
+    position: absolute;
+    background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0.6));
+    width: 2px;
+    height: 30px;
+    animation: rainDrop 0.8s linear infinite;
+}
+
+@keyframes rainDrop {
+    0% { transform: translateY(-100px) rotate(15deg); }
+    100% { transform: translateY(100vh) rotate(15deg); }
+}
+
+/* ============ FIREFLIES ANIMATION ============ */
+.ambient-fireflies {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 3;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 2s ease;
+}
+
+.ambient-scene[data-time="night"] .ambient-fireflies {
+    opacity: 1;
+}
+
+.firefly {
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    background: #e0ff00;
+    border-radius: 50%;
+    box-shadow: 0 0 6px 2px #e0ff00;
+    animation: fireflyGlow 3s ease-in-out infinite alternate, fireflyMove 10s linear infinite;
+}
+
+@keyframes fireflyGlow {
+    0% { opacity: 0.2; transform: scale(0.8); }
+    100% { opacity: 1; transform: scale(1.2); }
+}
+
+@keyframes fireflyMove {
+    0% { transform: translate(0, 0); }
+    25% { transform: translate(20px, -30px); }
+    50% { transform: translate(-10px, -60px); }
+    75% { transform: translate(-30px, -20px); }
+    100% { transform: translate(0, 0); }
 }

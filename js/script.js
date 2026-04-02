@@ -478,6 +478,77 @@ function updateWeather(temp, humidity, code, wind) {
 
     const elWindModal = document.getElementById('wind-modal');
     if (elWindModal) elWindModal.textContent = Math.round(wind) + ' km/h';
+
+    // Update ambient background
+    updateAmbientEnvironment(temp, code);
+}
+
+function updateAmbientEnvironment(temp, code) {
+    const ambientScene = document.getElementById('ambient-scene');
+    if (!ambientScene) return;
+
+    // 1. Time Logic
+    const hour = new Date().getHours();
+    let timeState = 'day';
+    if (hour >= 5 && hour < 11) {
+        timeState = 'morning';
+    } else if (hour >= 11 && hour < 15) {
+        timeState = 'day';
+    } else if (hour >= 15 && hour < 19) {
+        timeState = 'afternoon';
+    } else {
+        timeState = 'night';
+    }
+
+    // Assign time attribute
+    ambientScene.setAttribute('data-time', timeState);
+
+    // 2. Weather Logic
+    let weatherState = 'clear';
+    const isRaining = ((code >= 51 && code <= 65) || (code >= 80 && code <= 82) || (code >= 95 && code <= 99));
+    
+    if (isRaining) {
+        weatherState = 'rain';
+    } else if (temp >= 28) {
+        weatherState = 'hot';
+    }
+
+    // Assign weather attribute
+    ambientScene.setAttribute('data-weather', weatherState);
+
+    // 3. Generate Raindrops if raining
+    const rainContainer = document.getElementById('ambient-rain');
+    if (rainContainer) {
+        rainContainer.innerHTML = ''; // Clear previous
+        if (weatherState === 'rain') {
+            const dropCount = 100;
+            for (let i = 0; i < dropCount; i++) {
+                const drop = document.createElement('div');
+                drop.classList.add('drop');
+                drop.style.left = Math.random() * 100 + '%';
+                drop.style.animationDuration = 0.5 + Math.random() * 0.5 + 's';
+                drop.style.animationDelay = Math.random() * 2 + 's';
+                rainContainer.appendChild(drop);
+            }
+        }
+    }
+
+    // 4. Generate Fireflies if night
+    const fireflyContainer = document.getElementById('ambient-fireflies');
+    if (fireflyContainer) {
+        fireflyContainer.innerHTML = ''; // Clear previous
+        if (timeState === 'night') {
+            const fireflyCount = 30;
+            for (let i = 0; i < fireflyCount; i++) {
+                const firefly = document.createElement('div');
+                firefly.classList.add('firefly');
+                firefly.style.left = Math.random() * 100 + '%';
+                firefly.style.top = Math.random() * 80 + 20 + '%'; // Don't spawn too high
+                firefly.style.animationDelay = (Math.random() * 5) + 's, ' + (Math.random() * 10) + 's';
+                fireflyContainer.appendChild(firefly);
+            }
+        }
+    }
 }
 
 function getWeatherDescription(code) {
@@ -1345,6 +1416,43 @@ function closeRapatModal(event) {
     }
 }
 
+// Helper function to convert HTML to WhatsApp markdown
+function convertHtmlToWhatsAppMarkdown(html) {
+    let text = html;
+    
+    // Handle headings
+    text = text.replace(/<h[1-6][^>]*>(.*?)<\/h[1-6]>/gi, '*$1*\n');
+    
+    // Handle bold/strong
+    text = text.replace(/<(b|strong)[^>]*>(.*?)<\/\1>/gi, '*$2*');
+    
+    // Handle italic/em
+    text = text.replace(/<(i|em)[^>]*>(.*?)<\/\1>/gi, '_$2_');
+    
+    // Handle strike/del
+    text = text.replace(/<(s|strike|del)[^>]*>(.*?)<\/\1>/gi, '~$2~');
+    
+    // Handle lists
+    text = text.replace(/<li[^>]*>(.*?)<\/li>/gi, '- $1\n');
+    
+    // Handle <br> and <p> with newlines
+    text = text.replace(/<br\s*\/?>/gi, '\n');
+    text = text.replace(/<\/p>/gi, '\n');
+    
+    // Remove all remaining HTML tags
+    text = text.replace(/<[^>]+>/g, '');
+    
+    // Decode HTML entities
+    const textArea = document.createElement('textarea');
+    textArea.innerHTML = text;
+    text = textArea.value;
+    
+    // Clean up multiple newlines
+    text = text.replace(/\n{3,}/g, '\n\n').trim();
+    
+    return text;
+}
+
 // Prepare export container with correct styling
 function prepareRapatExport(plainTextMode = false) {
     const tanggal = document.getElementById('rapat-tanggal').value;
@@ -1356,18 +1464,16 @@ function prepareRapatExport(plainTextMode = false) {
     const formattedDate = dateObj.toLocaleDateString('id-ID', options);
     
     let contentHtml = '';
-    let contentText = '';
     
     if (quillRapatEditor) {
         contentHtml = quillRapatEditor.root.innerHTML;
-        contentText = quillRapatEditor.getText();
     }
     
     if (plainTextMode) {
         return {
             date: formattedDate,
             title: judul,
-            text: contentText
+            text: convertHtmlToWhatsAppMarkdown(contentHtml) || quillRapatEditor.getText()
         };
     }
     
