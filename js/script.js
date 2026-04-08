@@ -1121,39 +1121,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Initialize Denah Modal interactions
     initDenahInteractions();
-
-    // Initialize Ambient Leaves
-    initAmbientLeaves();
-
+    
     // Re-initialize ripple effects after dynamic content loads
     setTimeout(initRippleEffects, 2000);
 });
-
-// ============ AMBIENT EFFECTS ============
-function initAmbientLeaves() {
-    const container = document.getElementById('ambient-leaves');
-    if (!container) return;
-
-    const leafCount = 15;
-    for (let i = 0; i < leafCount; i++) {
-        const leaf = document.createElement('div');
-        leaf.className = 'leaf';
-
-        // Randomize positions and animations
-        const startX = Math.random() * 100;
-        const duration = 10 + Math.random() * 20;
-        const delay = Math.random() * -20;
-        const size = 10 + Math.random() * 10;
-
-        leaf.style.left = startX + 'vw';
-        leaf.style.width = size + 'px';
-        leaf.style.height = size + 'px';
-        leaf.style.animationDuration = duration + 's';
-        leaf.style.animationDelay = delay + 's';
-
-        container.appendChild(leaf);
-    }
-}
 
 // ============ THEME MANAGEMENT ============
 function initTheme() {
@@ -1479,7 +1450,23 @@ function prepareRapatExport(plainTextMode = false) {
     
     document.getElementById('export-tanggal').innerText = formattedDate;
     document.getElementById('export-judul').innerText = judul;
-    document.getElementById('export-content').innerHTML = contentHtml;
+    // Force black color aggressively for all tags in exported content
+    const contentHtmlWithStyle = `
+        <style>
+            #rapat-export-container, #rapat-export-container *, 
+            #export-content, #export-content *,
+            #export-content p, #export-content span, #export-content li, 
+            #export-content h1, #export-content h2, #export-content h3 {
+                color: #000000 !important;
+                background-color: transparent !important;
+                -webkit-text-fill-color: #000000 !important;
+                opacity: 1 !important;
+                visibility: visible !important;
+            }
+        </style>
+        ${contentHtml}
+    `;
+    document.getElementById('export-content').innerHTML = contentHtmlWithStyle;
     
     return document.getElementById('rapat-export-container');
 }

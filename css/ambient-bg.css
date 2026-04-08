@@ -84,27 +84,7 @@
     animation-delay: -10s;
 }
 
-/* Falling Leaves Animation */
-.ambient-leaves {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 3;
-    pointer-events: none;
-}
-
-.leaf {
-    position: absolute;
-    top: -50px;
-    width: 15px;
-    height: 15px;
-    background: #4ade80;
-    border-radius: 2px 15px 2px 15px;
-    opacity: 0.3;
-    animation: fall linear infinite;
-}
+/* Moving Clouds Animation */
 
 @keyframes kenBurns {
     0% {

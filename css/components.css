@@ -338,38 +338,69 @@
     width: 100%;
 }
 
-/* ============ MEETING NOTES (PENCATATAN RAPAT) MODAL ============ */
+/* ============ MEETING NOTES (PENCATATAN RAPAT) MODAL - MODERN & BRIGHT ============ */
 .rapat-modal-content {
-    max-width: 800px !important;
-    padding: 40px;
-    background: var(--bg-card);
+    position: relative;
+    max-width: 900px !important;
+    width: 100%;
+    max-height: 90vh;
+    padding: 0 !important; /* Reset padding for header/body split */
+    background: #ffffff !important;
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    overflow-y: auto;
+    color: #1e293b !important;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25), 
+                0 0 40px rgba(0, 0, 0, 0.05) !important;
+    border: none !important;
+    border-radius: 24px !important;
+    animation: slideInModal 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    -webkit-overflow-scrolling: touch;
 }
 
 .rapat-modal-header {
-    text-align: center;
-    margin-bottom: 10px;
+    background: #f8fafc;
+    padding: 30px;
+    text-align: left !important;
+    border-bottom: 1px solid #e2e8f0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
-.rapat-modal-header h2 {
-    font-size: 28px;
-    margin-bottom: 10px;
-    color: var(--text-primary);
+.rapat-modal-header-text h2 {
+    font-size: 24px !important;
+    margin-bottom: 4px !important;
+    color: #0f172a !important;
     display: flex;
     align-items: center;
-    justify-content: center;
-    gap: 10px;
+    gap: 12px;
+    font-weight: 700 !important;
+    text-align: left !important;
+    justify-content: flex-start !important;
 }
 
-.rapat-modal-header p {
-    color: var(--text-secondary);
+.rapat-modal-header-text h2 i {
+    color: var(--primary-color);
+}
+
+.rapat-modal-header-text p {
+    color: #64748b !important;
+    font-size: 14px;
+    margin: 0;
 }
 
 .rapat-modal-body {
+    padding: 30px;
     display: flex;
     flex-direction: column;
+    gap: 25px;
+    background: #ffffff;
+}
+
+.rapat-form-row {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
     gap: 20px;
 }
 
@@ -382,108 +413,142 @@
 
 .form-group-rapat label {
     font-weight: 600;
-    color: var(--text-primary);
-    font-size: 14px;
+    color: #334155;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
 .rapat-input {
-    padding: 12px 15px;
-    border-radius: 8px;
-    border: 1px solid var(--border-color);
-    background: rgba(255, 255, 255, 0.05);
-    color: var(--text-primary);
+    padding: 14px 16px;
+    border-radius: 12px;
+    border: 1px solid #cbd5e1;
+    background: #ffffff !important;
+    color: #000000 !important;
     font-family: inherit;
     font-size: 15px;
-    transition: all 0.3s ease;
+    transition: all 0.2s ease;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.05);
 }
 
 .rapat-input:focus {
     outline: none;
     border-color: var(--primary-color);
-    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+    box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.15), 
+                inset 0 1px 2px rgba(0, 0, 0, 0.05);
 }
 
-/* Override Quill defaults for Dark/Glass Theme */
+/* Modern Quill Editor Styling for Light Mode */
 #rapat-editor-wrapper {
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: 8px;
-    border: 1px solid var(--border-color);
+    background: #ffffff;
+    border-radius: 16px;
+    border: 1px solid #cbd5e1;
     overflow: hidden;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 .ql-toolbar.ql-snow {
     border: none !important;
-    border-bottom: 1px solid var(--border-color) !important;
-    background: rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid #e2e8f0 !important;
+    background: #f1f5f9 !important;
+    padding: 12px !important;
 }
 
-.ql-toolbar.ql-snow .ql-stroke {
-    stroke: var(--text-primary) !important;
+.ql-snow .ql-stroke {
+    stroke: #475569 !important;
 }
 
-.ql-toolbar.ql-snow .ql-fill {
-    fill: var(--text-primary) !important;
+.ql-snow .ql-fill {
+    fill: #475569 !important;
 }
 
-.ql-toolbar.ql-snow .ql-picker {
-    color: var(--text-primary) !important;
+.ql-snow .ql-picker {
+    color: #475569 !important;
 }
 
-#rapat-export-container,
-#rapat-export-container * {
-    color: #000 !important;
-}
-
-/* Editor content area */
 .ql-container.ql-snow {
     border: none !important;
-    font-family: 'Inter', 'Poppins', sans-serif !important;
-    font-size: 15px !important;
-    color: var(--text-primary) !important;
-    background: transparent !important;
+    font-family: 'Inter', sans-serif !important;
+    font-size: 16px !important;
+    color: #000000 !important;
+    background: #ffffff !important;
 }
 
-.ql-editor {
-    user-select: text !important;
-    -webkit-user-select: text !important;
-    pointer-events: auto !important;
+/* Aggressive black text force for NOTULENSI editor */
+.ql-editor, 
+.ql-editor *,
+#rapat-editor .ql-editor,
+#rapat-editor .ql-editor p,
+#rapat-editor .ql-editor span,
+#rapat-editor .ql-editor ul,
+#rapat-editor .ql-editor ol,
+#rapat-editor .ql-editor li,
+#rapat-editor .ql-editor h1,
+#rapat-editor .ql-editor h2,
+#rapat-editor .ql-editor h3,
+#rapat-editor .ql-editor strong,
+#rapat-editor .ql-editor em {
+    color: #000000 !important;
+    -webkit-text-fill-color: #000000 !important;
+    opacity: 1 !important;
 }
 
 #rapat-editor {
-    min-height: 250px;
-    max-height: 400px;
-    overflow-y: auto;
+    min-height: 300px;
+    max-height: 500px;
+    padding: 20px;
+    background: #ffffff !important;
 }
 
 .rapat-actions {
     display: flex;
     gap: 15px;
     justify-content: flex-end;
-    margin-top: 20px;
-    flex-wrap: wrap;
+    padding-top: 20px;
+    border-top: 1px solid #f1f5f9;
 }
 
-.btn-whatsapp-direct {
-    background: linear-gradient(135deg, #25D366 0%, #20BA5A 100%) !important;
-    color: #fff !important;
-    border: none;
-    box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+.btn-clear-rapat {
+    background: #fee2e2 !important;
+    color: #dc2626 !important;
+    border: 1px solid #fecaca !important;
 }
 
-.btn-whatsapp-direct:hover {
-    transform: translateY(-3px) scale(1.02);
-    box-shadow: 0 8px 25px rgba(37, 211, 102, 0.6);
+.btn-clear-rapat:hover {
+    background: #fecaca !important;
+    transform: translateY(-2px);
+}
+
+.btn-export-word {
+    background: #eff6ff !important;
+    color: #2563eb !important;
+    border: 1px solid #dbeafe !important;
+}
+
+.btn-export-word:hover {
+    background: #dbeafe !important;
+    transform: translateY(-2px);
 }
 
 @media (max-width: 768px) {
+    .rapat-form-row {
+        grid-template-columns: 1fr;
+    }
+    
     .rapat-actions {
         flex-direction: column;
     }
+    
     .rapat-actions .btn {
         width: 100%;
         justify-content: center;
     }
-    .rapat-modal-content {
-        padding: 25px 20px;
+    
+    .rapat-modal-header {
+        padding: 20px;
+    }
+    
+    .rapat-modal-body {
+        padding: 20px;
     }
 }

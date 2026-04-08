@@ -41,7 +41,6 @@
             <div class="cloud"></div>
         </div>
         <div class="ambient-rays"></div>
-        <div class="ambient-leaves" id="ambient-leaves"></div>
         <div class="ambient-rain" id="ambient-rain"></div>
         <div class="ambient-fireflies" id="ambient-fireflies"></div>
     </div>
@@ -687,57 +686,61 @@
 
     <!-- Meeting Notes Modal -->
     <div id="rapat-modal" class="info-modal" onclick="closeRapatModal(event)">
-        <div class="info-modal-content modern-modal rapat-modal-content" onclick="event.stopPropagation()">
-            <span class="denah-modal-close" onclick="closeRapatModal()">&times;</span>
+        <div class="rapat-modal-content" onclick="event.stopPropagation()">
             <div class="rapat-modal-header">
-                <h2><i class="fas fa-book-open"></i> Pencatatan Rapat</h2>
-                <p>Catat hasil rapat dan simpan dokumentasinya.</p>
+                <div class="rapat-modal-header-text">
+                    <h2><i class="fas fa-book-open"></i> Pencatatan Rapat</h2>
+                    <p>Buat dan simpan notulensi rapat warga secara profesional.</p>
+                </div>
+                <span class="denah-modal-close" onclick="closeRapatModal()" style="position: static; font-size: 32px;">&times;</span>
             </div>
             <div class="rapat-modal-body">
-                <div class="form-group-rapat">
-                    <label for="rapat-tanggal">Tanggal Rapat</label>
-                    <input type="date" id="rapat-tanggal" class="rapat-input">
+                <div class="rapat-form-row">
+                    <div class="form-group-rapat">
+                        <label for="rapat-tanggal">Tanggal Pelaksanaan</label>
+                        <input type="date" id="rapat-tanggal" class="rapat-input">
+                    </div>
+                    <div class="form-group-rapat">
+                        <label for="rapat-judul">Agenda / Judul Rapat</label>
+                        <input type="text" id="rapat-judul" class="rapat-input" placeholder="Misal: Pembahasan Program Kerja 2025">
+                    </div>
                 </div>
                 <div class="form-group-rapat">
-                    <label for="rapat-judul">Judul Rapat</label>
-                    <input type="text" id="rapat-judul" class="rapat-input" placeholder="Misal: Rapat Pleno Bulanan RT06">
-                </div>
-                <div class="form-group-rapat">
-                    <label>Catatan Rapat</label>
+                    <label>Isi Notulensi / Hasil Keputusan</label>
                     <div id="rapat-editor-wrapper">
                         <div id="rapat-editor"></div>
                     </div>
                 </div>
                 <div class="rapat-actions">
-                    <button class="btn btn-secondary" style="background: rgba(220, 38, 38, 0.1); border-color: rgba(220, 38, 38, 0.3); color: #ef4444;" onclick="clearRapatData()">
-                        <i class="fas fa-trash"></i> Bersihkan
+                    <button class="btn btn-secondary btn-clear-rapat" onclick="clearRapatData()">
+                        <i class="fas fa-trash-alt"></i> Hapus Draft
                     </button>
                     <button class="btn btn-whatsapp-direct" onclick="shareRapatWA()">
-                        <i class="fab fa-whatsapp"></i> WhatsApp
+                        <i class="fab fa-whatsapp"></i> Bagikan WA
+                    </button>
+                    <button class="btn btn-export-word" onclick="exportRapatWord()">
+                        <i class="fas fa-file-word"></i> Word (.doc)
                     </button>
                     <button class="btn btn-primary" onclick="exportRapatPDF()">
-                        <i class="fas fa-file-pdf"></i> Simpan PDF
-                    </button>
-                    <button class="btn btn-secondary" onclick="exportRapatWord()">
-                        <i class="fas fa-file-word"></i> Simpan Word
+                        <i class="fas fa-file-pdf"></i> Cetak PDF
                     </button>
                 </div>
             </div>
             
             <!-- Hidden container for export formatting -->
-            <div id="rapat-export-container" style="display:none; background: #fff; color: #000; padding: 40px; font-family: Arial, sans-serif;">
-                <div style="display: flex; align-items: center; border-bottom: 3px solid #000; padding-bottom: 15px; margin-bottom: 20px;">
+            <div id="rapat-export-container" style="display:none; background: #ffffff !important; color: #000000 !important; padding: 40px; font-family: Arial, sans-serif; text-align: left !important; -webkit-font-smoothing: antialiased;">
+                <div style="display: flex; align-items: center; border-bottom: 3px solid #000000; padding-bottom: 15px; margin-bottom: 20px; background: #ffffff !important;">
                     <!-- Logo RT06 -->
                     <img src="images/pp-rt-6.png" alt="Logo RT" style="width: 80px; height: 80px; object-fit: contain;">
                     <!-- Header Text Centered -->
-                    <div style="flex: 1; text-align: center; padding-right: 80px;">
-                        <h2 style="margin: 0; font-size: 26px; font-weight: bold; text-transform: uppercase;">RT06 RW02 KADIROJO 2</h2>
-                        <p style="margin: 5px 0 0 0; font-size: 14px;">Purwomartani, Kalasan, Sleman, Yogyakarta</p>
+                    <div style="flex: 1; text-align: center; padding-right: 80px; color: #000000 !important;">
+                        <h2 style="margin: 0; font-size: 26px; font-weight: bold; text-transform: uppercase; color: #000000 !important;">RT06 RW02 KADIROJO 2</h2>
+                        <p style="margin: 5px 0 0 0; font-size: 14px; color: #000000 !important;">Purwomartani, Kalasan, Sleman, Yogyakarta</p>
                     </div>
                 </div>
-                <h3 style="text-align: center; margin-bottom: 10px; text-transform: uppercase;" id="export-judul">NOTULENSI RAPAT</h3>
-                <p style="margin-bottom: 20px;"><strong>Tanggal:</strong> <span id="export-tanggal"></span></p>
-                <div id="export-content" style="line-height: 1.6;"></div>
+                <h3 style="text-align: center; margin-bottom: 10px; text-transform: uppercase; color: #000000 !important;" id="export-judul">NOTULENSI RAPAT</h3>
+                <p style="margin-bottom: 20px; color: #000000 !important;"><strong>Tanggal:</strong> <span id="export-tanggal" style="color: #000000 !important;"></span></p>
+                <div id="export-content" style="line-height: 1.6; color: #000000 !important; background: #ffffff !important;"></div>
             </div>
         </div>
     </div>
